@@ -1,5 +1,9 @@
 # deepgram
 
+[![NPM version][npm-image]][npm-url]
+[![NPM downloads][npm-downloads]][npm-url]
+[![MIT License][license-image]][license-url]
+
 NPM module that binds to the Deepgram audio search/transcription API.
 
 https://www.deepgram.com
@@ -38,4 +42,10 @@ http://api.lexika.io/doc
 
 ## License
 
-MIT - check the license file.
+[MIT][license-url]
+
+[npm-image]: http://img.shields.io/npm/v/node-deepgram.svg?style=flat
+[npm-url]: https://npmjs.org/package/node-deepgram
+[npm-downloads]: http://img.shields.io/npm/dm/node-deepgram.svg?style=flat
+[license-url]: LICENSE
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
