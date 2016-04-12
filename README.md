@@ -25,8 +25,8 @@ let deepgram = new Deepgram({
   userID: '<user_id>'
 });
 
-deepgram.indexContent('http://website.com/audio.mp3').then(data => {
-  // handle data.contentID
+deepgram.index('http://website.com/audio.mp3').then(contentID => {
+  // do what you will with contentID
 }).catch(err => {
   // handle error
 });

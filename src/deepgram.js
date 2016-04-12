@@ -55,8 +55,13 @@ module.exports = class Deepgram {
     } else {
       action = 'index_content';
     }
-    return this._makeRequest(action, {
-      data_url: dataURI
+
+    return new Promise((resolve, reject) => {
+      this._makeRequest(action, {
+        data_url: dataURI
+      }).then(resp => {
+        resolve(resp.contentID);
+      }).catch(reject);
     });
   }
 
