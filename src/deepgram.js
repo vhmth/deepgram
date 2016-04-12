@@ -1,23 +1,15 @@
 var http = require('http');
 
-let DEEPGRAM_API_BASE_URI = 'http://api.deepgram.com';
+let DEEPGRAM_API_BASE_URI = 'api.deepgram.com';
 
 function _isArray(obj) {
   return Object.prototype.toString.call(obj) !== '[object Array]';
 }
 
-export default class Deepgram {
+module.exports = class Deepgram {
   constructor(options) {
     options = options || {};
-
     this.userID = options.userID;
-
-    this.api = new Frisbee({
-      baseURI: '',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
   }
 
   _makeRequest(action, body, uri) {
@@ -63,21 +55,21 @@ export default class Deepgram {
     } else {
       action = 'index_content';
     }
-    return _makeRequest(action, {
+    return this._makeRequest(action, {
       data_url: dataURI
     });
   }
 
   getBalance() {
     return new Promise((resolve, reject) => {
-      return _makeRequest('get_balance').then(({ balance }) => {
+      return this._makeRequest('get_balance').then(({ balance }) => {
         resolve(balance);
       }).catch(reject);
     });
   }
 
   getObjectStatus(contentID) {
-    return _makeRequest('get_object_status', {
+    return this._makeRequest('get_object_status', {
       contentID: contentID
     });
   }
@@ -85,33 +77,37 @@ export default class Deepgram {
   query(contentID, queryOptions) {
     queryOptions = queryOptions || {};
     queryOptions.contentID = contentID
-    return _makeRequest('object_search', queryOptions);
+    return this._makeRequest('object_search', queryOptions);
   }
 
   groupSearch(queryOptions) {
-    return _makeRequest('group_search',
+    return this._makeRequest('group_search',
       queryOptions,
-      'http://groupsearch.api.deepgram.com'
+      'groupsearch.api.deepgram.com'
     );
   }
 
   parallelSearch(queryOptions) {
-    return _makeRequest('parallel_search',
+    return this._makeRequest('parallel_search',
       queryOptions,
-      'http://groupsearch.api.deepgram.com'
+      'groupsearch.api.deepgram.com'
     );
   }
 
   tag(contentID, tag) {
-    return _makeRequest('tag_object', {
+    return this._makeRequest('tag_object', {
       contentID: contentID,
       tag:       tag
     });
   }
 
   getTags(contentID) {
-    return _makeRequest('get_object_tags', {
-      contentID: contentID
+    return new Promise((resolve, reject) => {
+      this._makeRequest('get_object_tags', {
+        contentID: contentID
+      }).then(resp => {
+        resolve(resp.tags);
+      }).catch(reject);
     });
   }
-}
+};

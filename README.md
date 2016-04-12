@@ -22,7 +22,7 @@ Indexing a file:
 import Deepgram from 'node-deepgram';
 
 let deepgram = new Deepgram({
-  userId: '<user_id>'
+  userID: '<user_id>'
 });
 
 deepgram.indexContent('http://website.com/audio.mp3').then(data => {
