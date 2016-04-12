@@ -2,7 +2,7 @@
   "name": "node-deepgram",
   "author": "Vinay Hiremath <vhiremath4@gmail.com>",
   "license": "MIT",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Node wrapper for Deepgram",
   "main": "dist/deepgram.js",
   "scripts": {

@@ -69,8 +69,12 @@ module.exports = class Deepgram {
   }
 
   getObjectStatus(contentID) {
-    return this._makeRequest('get_object_status', {
-      contentID: contentID
+    return new Promise((resolve, reject) => {
+      this._makeRequest('get_object_status', {
+        contentID: contentID
+      }).then(resp => {
+        resolve(resp.status);
+      }).catch(reject);
     });
   }
 
