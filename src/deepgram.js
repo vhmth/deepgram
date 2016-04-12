@@ -3,7 +3,7 @@ var http = require('http');
 let DEEPGRAM_API_BASE_URI = 'api.deepgram.com';
 
 function _isArray(obj) {
-  return Object.prototype.toString.call(obj) !== '[object Array]';
+  return Object.prototype.toString.call(obj) === '[object Array]';
 }
 
 module.exports = class Deepgram {
@@ -58,7 +58,7 @@ module.exports = class Deepgram {
 
     return new Promise((resolve, reject) => {
       this._makeRequest(action, {
-        data_url: dataURI
+        data_url: dataURIs
       }).then(resp => {
         resolve(resp.contentID);
       }).catch(reject);
