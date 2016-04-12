@@ -47,19 +47,26 @@ module.exports = class Deepgram {
     });
   }
 
-  // pass in an array or a string
-  index(dataURIs) {
-    let action;
+  // pass in an array or a string for dataURIs
+  // pass in an optional array of tags
+  index(dataURIs, tags) {
+    let requestBody = {
+      data_url: dataURIs
+    };
+
     if (_isArray(dataURIs)) {
-      action = 'index_content_list';
+      requestBody.action = 'index_content_list';
     } else {
-      action = 'index_content';
+      requestBody.action = 'index_content';
+    }
+
+    tags = tags || [];
+    if (tags.length > 0) {
+      requestBody.tags = tags;
     }
 
     return new Promise((resolve, reject) => {
-      this._makeRequest(action, {
-        data_url: dataURIs
-      }).then(resp => {
+      this._makeRequest(action, requestBody).then(resp => {
         resolve(resp.contentID);
       }).catch(reject);
     });
