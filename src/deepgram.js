@@ -52,12 +52,12 @@ module.exports = class Deepgram {
   index(dataURIs, tags) {
     let requestBody = {
       data_url: dataURIs
-    };
+    }, action;
 
     if (_isArray(dataURIs)) {
-      requestBody.action = 'index_content_list';
+      action = 'index_content_list';
     } else {
-      requestBody.action = 'index_content';
+      action = 'index_content';
     }
 
     tags = tags || [];
