@@ -104,10 +104,14 @@ module.exports = class Deepgram {
   }
 
   parallelSearch(queryOptions) {
-    return this._makeRequest('parallel_search',
-      queryOptions,
-      'groupsearch.api.deepgram.com'
-    );
+    return new Promise((resolve, reject) => {
+      this._makeRequest('parallel_search',
+        queryOptions,
+        'groupsearch.api.deepgram.com'
+      ).then(resp => {
+        resolve(resp.object_result);
+      }).catch(reject);
+    });
   }
 
   tag(contentID, tag) {
